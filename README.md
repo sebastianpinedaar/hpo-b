@@ -21,6 +21,6 @@ perf = hpob_hdlr.evaluate(method, search_space_id = search_space_id,
                                         n_iterations = 100 )
 
 
-plt.plot(np.array(perf_per_method).mean(axis=0))
+plt.plot(perf)
 
 
