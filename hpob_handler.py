@@ -21,6 +21,7 @@ class HPOBHandler:
 
     def load_data(self, rootdir="", only_test = True, augmented_train = False):
 
+        print("Loading data...")
         meta_train_augmented_path = os.path.join(rootdir, "meta-train-dataset-augmented.json")
         meta_train_path = os.path.join(rootdir, "meta-train-dataset.json")
         meta_test_path = os.path.join(rootdir,"meta-test-dataset.json")

@@ -4,7 +4,6 @@ from botorch.acquisition.analytic import ConstrainedExpectedImprovement
 from botorch.acquisition.monte_carlo import qExpectedImprovement
 from botorch.acquisition.multi_step_lookahead import _construct_sample_weights
 from botorch.sampling.samplers import SobolQMCNormalSampler
-from hpob_handler import HPOBHandler
 import matplotlib.pyplot as plt
 from botorch.models import SingleTaskGP
 from botorch.fit import fit_gpytorch_model
@@ -28,31 +27,30 @@ class RandomSearch:
 
 class GaussianProcess:
 
-    def __init__(self, name="UCB"):
-
+    def __init__(self, acq_name="UCB"):
         print("Using Gaussian Process as method...")
 
-        self.name = name
-        
+        self.acq_name = acq_name        
         #initialize acquisition functions
 
     def get_acquisition(self, gp = None, best_f =0.0):
 
         assert gp != None, "The model was not correctly specified"
+        
 
-        if self.name == "UCB":
+        if self.acq_name == "UCB":
             return UpperConfidenceBound(gp, beta=0.1)
         
-        elif self.name == "EI":
+        elif self.acq_name == "EI":
             return ExpectedImprovement(gp, best_f=best_f)
 
-        elif self.name == "PM":
+        elif self.acq_name == "PM":
             return PosteriorMean(gp)
 
-        elif self.name == "PI":
+        elif self.acq_name == "PI":
             return ProbabilityOfImprovement(gp, best_f=best_f)
 
-        elif self.name == "qEI":
+        elif self.acq_name == "qEI":
             sampler = SobolQMCNormalSampler(1000)
             return qExpectedImprovement(gp, best_f=best_f)
             
@@ -78,20 +76,5 @@ class GaussianProcess:
 
 
 
-if __name__ == "__main__":
-    
-    hpob_hdlr = HPOBHandler(root_dir="../BOSS-Bench/", mode="test")
-    rs_method = RandomSearch()
-    method = GaussianProcess()
-    search_space_id =  hpob_hdlr.get_search_spaces()[1]
-    dataset_id = hpob_hdlr.get_datasets(search_space_id)[1]
-
-    
-    perf_hist = hpob_hdlr.evaluate(method, search_space_id = search_space_id, 
-                                                dataset_id = dataset_id,
-                                                trial = "test0",
-                                                n_iterations = 100 )
-    plt.plot(perf_hist)
-    plt.show()
 
         
