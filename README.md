@@ -3,11 +3,19 @@ HPO-B is a benchmark for assessing the performance of HPO algorithms. This repo 
 
 ## Usage
 
-To run the code>
+Before testing the algorithm:
+
 * Download HPO-B from the link.
 * Download the source code of this repo.
-* Create a class that encapsulates the new HPO algorithm. The class should have a function called **observe_and_suggest** that will be called by **hpob_handler**, the class for loading the data and evaluating the algorithm.
-* This function receives three parameters *X_obs, y_obs, X_pen* that represent the observed hyperparameter configurations, its response value and the configurations pending to evalute, respectively. TIt should return the index of the next sample to evaluate in the pending configurations (*X_pen*).
+* Create a class that encapsulates the new HPO algorithm. The class should have a function called **observe_and_suggest** that will be called by **HPOBHandler object**, the class for loading the data and evaluating the algorithm.
+* This function receives three parameters *X_obs, y_obs, X_pen* that represent the observed hyperparameter configurations, its response value and the configurations pending to evalute, respectively. It should return the index of the next sample to evaluate in the pending configurations (*X_pen*).
+
+To test the algorithm:
+
+* Create a HPOBHandler object by specifying the path and the mode.
+* Three different modes are possible:
+ 
+
 ```python
 from hpob_handler import HPOBHandler
 from bo_methods import RandomSearch
