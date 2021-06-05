@@ -7,7 +7,7 @@ To run the code>
 * Download HPO-B from the link.
 * Download the source code of this repo.
 * Create a class that encapsulates the new HPO algorithm. The class should have a function called **observe_and_suggest** that will be called by **hpob_handler**, the class for loading the data and evaluating the algorithm.
-* This function receives three parameters *X_obs,y_obs,X_pen* that represent the observed hyperparameter configurations, its response value and the configurations pending to evalute. The handler
+* This function receives three parameters *X_obs, y_obs, X_pen* that represent the observed hyperparameter configurations, its response value and the configurations pending to evalute, respectively. TIt should return the index of the next sample to evaluate in the pending configurations (*X_pen*).
 ```python
 from hpob_handler import HPOBHandler
 from bo_methods import RandomSearch
