@@ -10,11 +10,9 @@ Before testing the algorithm:
 * Create a class that encapsulates the new HPO algorithm. The class should have a function called **observe_and_suggest** that will be called by **HPOBHandler object**, the class for loading the data and evaluating the algorithm.
 * This function receives three parameters *X_obs, y_obs, X_pen* that represent the observed hyperparameter configurations, its response value and the configurations pending to evalute, respectively. It should return the index of the next sample to evaluate in the pending configurations (*X_pen*).
 
-To test the algorithm:
 
-* Create a HPOBHandler object by specifying the path and the mode.
-* Three different modes are possible:
- 
+# Basic example
+
 
 ```python
 from hpob_handler import HPOBHandler
